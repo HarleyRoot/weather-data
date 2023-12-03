@@ -212,7 +212,7 @@ function init() {
         },
         tooltip: {
             trigger: 'item',
-            formatter: "{a}<br/>{b}:  {d}%)"
+            formatter: "{a}<br/>{b}:  {d}%"
         },
         calculable: true,
         series: [
