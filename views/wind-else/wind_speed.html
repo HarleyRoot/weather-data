@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Wind Speed Chart</title>
+    <!-- 引入 echarts 库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.1.2/echarts.min.js"></script>
+</head>
+<body>
+
+<!-- 为echarts图表添加一个容器 -->
+<div id="chart-container" style="width: 800px; height: 400px;"></div>
+
+<script>
+// 在页面加载后执行以下JavaScript代码
+document.addEventListener('DOMContentLoaded', function() {
+    // 初始化图表容器
+    var chartContainer = document.getElementById('chart-container');
+    var myChart = echarts.init(chartContainer);
+
+    // echarts配置选项
+    var option = {
+        
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            // 填写城市名称
+            data: ['北京', '天津', '上海', '重庆', '石家庄', '太原', '西安', '青岛', '郑州', '沈阳', '长春', '哈尔滨', '南京', '杭州', '合肥', '福州', '武汉', '长沙', '成都', '贵阳', '昆明', '广州', '海口', '西宁', '香港', '澳门'],
+            top:30,
+            selected: {
+                '北京': true,
+                '天津': true,
+                '上海': true,
+                '重庆': true,
+                '石家庄': false,
+                '太原': false,
+                '西安': false,
+                '青岛': false,
+                '郑州': false,
+                '沈阳': false,
+                '长春': false,
+                '哈尔滨': false,
+                '南京': false,
+                '杭州': false,
+                '合肥': false,
+                '福州': false,
+                '武汉': false,
+                '长沙': false,
+                '成都': false,
+                '贵阳': false,
+                '昆明': false,
+                '广州': false,
+                '海口': false,
+                '西宁': false,
+                '香港': false,
+                '澳门': false,
+            }
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataZoom: {
+                    yAxisIndex: 'none'
+                },
+                dataView: { readOnly: false },
+                magicType: { type: ['line', 'bar'] },
+                restore: {},
+                saveAsImage: {}
+                }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月']
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+            formatter: '{value} m/s'
+            }
+        },
+        dataZoom: [  // 添加dataZoom组件
+        {
+            type: 'slider',
+            show: true,
+            xAxisIndex: [0],
+            start: 0,
+            end: 100,
+            handleSize: 8
+        },
+        {
+            type: 'inside',
+            xAxisIndex: [0],
+            start: 0,
+            end: 100
+        }
+        ],
+        series: [
+        {
+            name: '北京',
+            type: 'line',
+            data: [3.126514132, 2.373511905, 3.065904506, 3.521890202, 2.880376344, 2.846527778, 2.81952862, 2.091463415, 1.969423211, 2.17833109, 3.646485734],
+            markPoint: {
+                data: [
+                { type: 'max', name: 'Max' },
+                { type: 'min', name: 'Min' }
+                ]
+            },
+            markLine: {
+                data: [{ type: 'average', name: 'Avg' }]
+            }
+        },
+        {
+            name: '天津',
+            type: 'line',
+            data: [2.921568627, 2.861607143, 3.416554509, 4.066805846, 3.41733871, 3.313244569, 3.510781671, 2.605691057, 2.40514246, 2.304845222, 3.508698678],
+            markPoint: {
+                data: [
+                { type: 'max', name: 'Max' },
+                { type: 'min', name: 'Min' }
+                ]
+            },
+            markLine: {
+                data: [{ type: 'average', name: 'Avg' }]
+            }
+        },
+        {
+            name: '上海',
+            type: 'line',
+            data: [2.218623482, 2.441964286, 2.433198381, 2.933333333, 2.64516129, 2.147679325, 2.459677419, 2.443089431, 1.916317992, 1.866935484, 2.404166667],
+            markPoint: {
+                data: [
+                { type: 'max', name: 'Max' },
+                { type: 'min', name: 'Min' }
+                ]
+            },
+            markLine: {
+                data: [{ type: 'average', name: 'Avg' }]
+            }
+        },
+        {
+            name: '重庆',
+            type: 'line',
+            data: [1.246963563, 1.428571429, 1.473684211, 1.7, 1.709677419, 1.459915612, 1.560483871, 1.789473684, 1.659663866, 1.342741935, 1.370833333],
+            markPoint: {
+                data: [
+                { type: 'max', name: 'Max' },
+                { type: 'min', name: 'Min' }
+                ]
+            },
+            markLine: {
+                data: [{ type: 'average', name: 'Avg' }]
+            }
+        },
+        {
+            name: '石家庄',
+            type: 'line',
+            data: [1.981578947, 1.927083333, 2.763612218, 2.717032967, 2.408602151, 2.740689655, 2.573351279, 2.025745257, 1.627071823, 1.842592593, 2.079019074],
+            markPoint: {
+                data: [
+                { type: 'max', name: 'Max' },
+                { type: 'min', name: 'Min' }
+                ]
+            },
+            markLine: {
+                data: [{ type: 'average', name: 'Avg' }]
+            }
+        },
+        {
+            name: '太原',
+            type: 'line',
+            data: [1.898785425, 1.879464286, 2.089068826, 2.683333333, 2.210526316, 1.644351464, 1.975708502, 1.591093117, 1.527196653, 1.213709677, 1.970833333],
+            markPoint: {
+                data: [
+                { type: 'max', name: 'Max' },
+                { type: 'min', name: 'Min' }
+                ]
+            },
+            markLine: {
+                data: [{ type: 'average', name: 'Avg' }]
+            }
+        },
+    {
+      name: '西安',
+      type: 'line',
+      data: [2.336473755, 2.869047619, 2.590053763, 3.376912378, 2.844086022, 2.672222222, 3.240915209, 2.944444444, 2.997222222, 2.131897712, 2.406119611],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '青岛',
+      type: 'line',
+      data: [3.729475101, 3.366071429, 4.331989247, 4.979137691, 4.227150538, 4.359722222, 4.145356662, 3.546070461, 2.727777778, 2.877523553, 4.171070932],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '郑州',
+      type: 'line',
+      data: [2.874324324, 2.751488095, 2.759408602, 3.753824757, 3.129032258, 2.285714286, 2.517520216, 2.350067843, 1.945833333, 1.866756393, 3.093184979],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '沈阳',
+      type: 'line',
+      data: [3.148749155, 3.023809524, 3.415208614, 3.910229645, 3.715725806, 2.832515767, 2.638814016, 2.679539295, 2.394023628, 2.668236878, 2.958942241],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '长春',
+      type: 'line',
+      data: [3.248990579, 3.212797619, 3.97311828, 4.498611111, 4.299731183, 3.241666667, 3.406460296, 2.600271003, 3.213888889, 2.841184388, 1.833333333],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '哈尔滨',
+      type: 'line',
+      data: [3.150740242, 3.382440476, 4.123655914, 4.85, 4.494623656, 3.181944444, 3.246298789, 3.085365854, 3.369444444, 3.258411844, 3.961057024],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '南京',
+      type: 'line',
+      data: [2.314864865, 2.81547619, 2.879032258, 3.379694019, 2.666666667, 2.633053221, 3.08490566, 2.453929539, 2.2625, 1.97577389, 2.408647141],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '杭州',
+      type: 'line',
+      data: [2.149797571, 2.232142857, 2.113360324, 2.225, 2.173387097, 1.970464135, 2.233870968, 2.08097166, 1.916317992, 1.883064516, 2.241666667],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '合肥',
+      type: 'line',
+      data: [2.359447005, 2.359447005, 2.64516129, 3.080952381, 2.63255814, 2.326732673, 2.64516129, 2.147465438, 2.121359223, 1.709677419, 2.49047619],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '福州',
+      type: 'line',
+      data: [1.943548387, 1.995535714, 1.894736842, 1.754166667, 2.004032258, 1.861344538, 2.427419355, 1.935483871, 2.368200837, 2.181451613, 2.308333333],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '武汉',
+      type: 'line',
+      data: [1.415322581, 1.589285714, 1.287449393, 1.966666667, 1.838709677, 1.441176471, 1.935483871, 1.540322581, 1.640167364, 1.088709677, 1.608333333],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '长沙',
+      type: 'line',
+      data: [2.922972973, 2.922972973, 2.725806452, 3.196105702, 3.314516129, 2.890756303, 3.478436658, 2.546070461, 3.141666667, 2.532974428, 2.860917942],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '成都',
+      type: 'line',
+      data: [1.605652759, 1.811011905, 2.044354839, 2.582753825, 2.241935484, 2.330555556, 2.383580081, 2.046070461, 2.068055556, 1.775235532, 1.770514604],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '贵阳',
+      type: 'line',
+      data: [2.387096774, 2.486607143, 2.344129555, 2.741666667, 2.766129032, 2.277310924, 2.822580645, 1.907258065, 2.518828452, 2.326612903, 2.316666667],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '昆明',
+      type: 'line',
+      data: [2.379032258, 2.75, 2.967611336, 3.0125, 2.786290323, 2.31092437, 2.346774194, 1.772357724, 1.857740586, 1.834677419, 1.904166667],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '广州',
+      type: 'line',
+      data: [2.608870968, 2.165178571, 2.105263158, 2.045833333, 2.116935484, 1.81092437, 2.25, 1.700404858, 1.665271967, 2.193548387, 2.104166667],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '海口',
+      type: 'line',
+      data: [3.98923284, 4.022321429, 3.186827957, 3.695833333, 3.297043011, 2.566666667, 3.109017497, 2.245257453, 2.363888889, 3.966352624, 3.990264256],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '西宁',
+      type: 'line',
+      data: [2.762096774, 2.736607143, 2.975708502, 4.0041841, 3.016260163, 2.510460251, 2.344129555, 2.372469636, 2.577405858, 2.185483871, 2.654166667],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '香港',
+      type: 'line',
+      data: [3.745967742, 4.450892857, 4.262096774, 4.9375, 4.419354839, 3.658333333, 4.20703125, 3.455645161, 5.047272727, 4.577181208, 3.875],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+    {
+      name: '澳门',
+      type: 'line',
+      data: [3.987804878, 3.470588235, 3.024590164, 3.354166667, 3.290322581, 2.8125, 3.048582996, 2.522267206, 3.2875, 3.959677419, 3.569037657],
+      markPoint: {
+        data: [
+          { type: 'max', name: 'Max' },
+          { type: 'min', name: 'Min' }
+        ]
+      },
+      markLine: {
+        data: [{ type: 'average', name: 'Avg' }]
+      }
+    },
+  ]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+});
+</script>
+
+</body>
+</html>
