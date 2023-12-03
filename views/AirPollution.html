@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据可视化demo</title>
+    <link href="../styles/common.css" rel="stylesheet">
+    <script src="../scripts/Plugin/jquery-3.3.1.min.js"></script>
+    <script src="../scripts/Plugin/echarts.min.js"></script>
+    <script src="../scripts/Plugin/bmap.min.js"></script>
+    <script type="text/javascript" src="../scripts/Plugin/echarts-map-china.js"></script>
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=9UxhL8yiE89j3ryPL2G25msjPFzTnDGd"></script>
+    <script src="../scripts/common.js"></script>
+    <script src="../scripts/AirPollution.js"></script>
+    <script src="../scripts/Plugin/laydate/laydate.js"></script>
+</head>
+<body>
+<!--顶部-->
+<header class="header left">
+    <div class="left nav">
+        <ul>
+            <li><i class="nav_1"></i><a href="op1.html">选择1</a> </li>
+            <li><i class="nav_2"></i><a href="op2.html">选择2</a> </li>
+            <li><i class="nav_3"></i><a href="op3.html">选择3</a> </li>
+            </ul>
+    </div>
+    <div class="header_center left" style="position:relative">
+        
+        <h2><strong>风雨同行</strong></h2>
+
+    </div>
+    <div class="right nav text_right">
+        <ul>
+            <li><i class="nav_4"></i><a href="daylength.html">日照时长</a> </li>
+            <li class="nav_active"><i class="nav_5"></i><a href="AirPollution.html">大气污染</a> </li>
+
+        </ul>
+    </div>
+
+</header>
+<!--内容部分-->
+<div class="con left">
+    <!--统计分析图-->
+    <div class="div_any">
+        <div class="left div_any01">
+            <div class="div_any_child">
+                <div class="div_any_title"><img src="../images/title_3.png">污染物排名</div>
+                <p id="rankChart" class="p_chart"></p>
+            </div>
+            <div class="div_any_child">
+                <div class="div_any_title"><img src="../images/title_2.png">全国AQI折线图</div>
+                <p id="histogramChart" class="p_chart"></p>
+            </div>
+        </div>
+        <div class="div_any02 left ">
+            <div class="div_any_child div_height">
+                <label for="pieSelect" ></label>
+                <form autocomplete="off">
+                <select id="heatSelect" style="font-family: 'Arial', sans-serif; color: #fff; background-color: #0f1c30">
+                    <option value="1" selected> 一月 </option>
+                    <option value="2"> 二月 </option>
+                    <option value="3"> 三月 </option>
+                    <option value="4"> 四月 </option>
+                    <option value="5"> 五月 </option>
+                    <option value="6"> 六月 </option>
+                    <option value="7"> 七月 </option>
+                    <option value="8"> 八月 </option>
+                    <option value="9"> 九月 </option>
+                    <option value="10"> 十月 </option>
+                    <option value="11"> 十一月 </option>
+                </select>
+                </form>
+                <div class="div_any_title any_title_width"><img src="../images/title_0.png">全国31省AQI </div>
+                <div id="heatChart" style="width:97.5%;height:95%;display: inline-block;padding-left: 1.25%;padding-top:2.2%"></div>
+            </div>
+        </div>
+        <div class="right div_any01">
+            <div class="div_any_child">
+                <label for="pieSelect" ></label>
+                <form autocomplete="off">
+                    <select id="pieSelect" style="font-family: 'Arial', sans-serif; color: #fff; background-color: #0f1c30">
+                        <option value="1" selected> 一月 </option>
+                        <option value="2"> 二月 </option>
+                        <option value="3"> 三月 </option>
+                        <option value="4"> 四月 </option>
+                        <option value="5"> 五月 </option>
+                        <option value="6"> 六月 </option>
+                        <option value="7"> 七月 </option>
+                        <option value="8"> 八月 </option>
+                        <option value="9"> 九月 </option>
+                        <option value="10"> 十月 </option>
+                        <option value="11"> 十一月 </option>
+                    </select>
+                </form>
+                <div class="div_any_title"><img src="../images/title_1.png">污染物成分图</div>
+                <p id="pieChart" class="p_chart"></p>
+            </div>
+            <div class="div_any_child">
+                <label for="provinceSelect1"  ></label>
+                <label for="provinceSelect2"  ></label>
+                <form autocomplete="off">
+                <select id="provinceSelect1" style="font-family: 'Arial', sans-serif; color: #fff; background-color: #0f1c30">
+                    <option value="上海"> 上海 </option>
+                    <option value="云南"> 云南 </option>
+                    <option value="内蒙古"> 内蒙古 </option>
+                    <option value="北京"> 北京 </option>
+                    <option value="台湾"> 台湾 </option>
+                    <option value="吉林"> 吉林 </option>
+                    <option value="四川"> 四川 </option>
+                    <option value="天津"> 天津 </option>
+                    <option value="宁夏"> 宁夏 </option>
+                    <option value="安徽"> 安徽 </option>
+                    <option value="山东" selected> 山东 </option>
+                    <option value="山西"> 山西 </option>
+                    <option value="广东"> 广东 </option>
+                    <option value="广西"> 广西 </option>
+                    <option value="新疆"> 新疆 </option>
+                    <option value="江苏"> 江苏 </option>
+                    <option value="江西"> 江西 </option>
+                    <option value="河北"> 河北 </option>
+                    <option value="河南"> 河南 </option>
+                    <option value="浙江"> 浙江 </option>
+                    <option value="海南"> 海南 </option>
+                    <option value="湖北"> 湖北 </option>
+                    <option value="湖南"> 湖南 </option>
+                    <option value="澳门"> 澳门 </option>
+                    <option value="甘肃"> 甘肃 </option>
+                    <option value="福建"> 福建 </option>
+                    <option value="西藏"> 西藏 </option>
+                    <option value="贵州"> 贵州 </option>
+                    <option value="辽宁"> 辽宁 </option>
+                    <option value="重庆"> 重庆 </option>
+                    <option value="陕西"> 陕西 </option>
+                    <option value="青海"> 青海 </option>
+                    <option value="香港"> 香港 </option>
+                    <option value="黑龙江"> 黑龙江 </option>
+                </select>
+                <select id="provinceSelect2" style="font-family: 'Arial', sans-serif; color: #fff; background-color: #0f1c30; position: absolute; top: 0; right: 0;"; >
+                    <option value="上海"> 上海 </option>
+                    <option value="云南"> 云南 </option>
+                    <option value="内蒙古"> 内蒙古 </option>
+                    <option value="北京" selected> 北京 </option>
+                    <option value="台湾"> 台湾 </option>
+                    <option value="吉林"> 吉林 </option>
+                    <option value="四川"> 四川 </option>
+                    <option value="天津"> 天津 </option>
+                    <option value="宁夏"> 宁夏 </option>
+                    <option value="安徽"> 安徽 </option>
+                    <option value="山东"> 山东 </option>
+                    <option value="山西"> 山西 </option>
+                    <option value="广东"> 广东 </option>
+                    <option value="广西"> 广西 </option>
+                    <option value="新疆"> 新疆 </option>
+                    <option value="江苏"> 江苏 </option>
+                    <option value="江西"> 江西 </option>
+                    <option value="河北"> 河北 </option>
+                    <option value="河南"> 河南 </option>
+                    <option value="浙江"> 浙江 </option>
+                    <option value="海南"> 海南 </option>
+                    <option value="湖北"> 湖北 </option>
+                    <option value="湖南"> 湖南 </option>
+                    <option value="澳门"> 澳门 </option>
+                    <option value="甘肃"> 甘肃 </option>
+                    <option value="福建"> 福建 </option>
+                    <option value="西藏"> 西藏 </option>
+                    <option value="贵州"> 贵州 </option>
+                    <option value="辽宁"> 辽宁 </option>
+                    <option value="重庆"> 重庆 </option>
+                    <option value="陕西"> 陕西 </option>
+                    <option value="青海"> 青海 </option>
+                    <option value="香港"> 香港 </option>
+                    <option value="黑龙江"> 黑龙江 </option>
+                </select>
+                </form>
+                <div class="div_any_title" ><img src="../images/title_4.png">AQI雷达图</div>
+                <p id="radarChart" class="p_chart"></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
