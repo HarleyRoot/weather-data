@@ -24,3 +24,10 @@
 ![wind1](https://github.com/HarleyRoot/weather-data/raw/main/images/AirPollution.png)
 
 ## 气温变化
+本网页根据中国各省市温度变化数据进行可视化，从而实现气温观测.
+左上图为各省月均最高最低温度，通过选择省份观察不同省在不同月份的最高最低温度情况。
+左下角为各省份中市热力图，通过选择月份更仔细观察省内温度变化.
+中间为中国各省热力图，选择月份观察全国温度变化趋势.
+右上为季节性温度变化折线图，判断各季节的温度特征.
+右下为省月均温对比雷达图.
+![wind1](https://github.com/HarleyRoot/weather-data/raw/main/images/temperature.png)
