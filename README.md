@@ -12,4 +12,4 @@
 左上图为2023年中国各省平均风速热力图，通过选择不同的季节，从而看出不同省份随季节变化风速的变化情况。
 右上图为为2023年中国主要城市风速折线图，通过选择不同城市，可以看出该城市随月份风速的变化以及其最高风速和最低风速，选择多个城市也可以进行城市之间的比较。
 左下图结合百度地图实现风向的可视化，现只根据之前的数据绘制了简单的demo，后续应找不同季节变化下的风向图。
-!wind1](https://github.com/HarleyRoot/weather-data/raw/main/images/wind1.png)
+![wind1](https://github.com/HarleyRoot/weather-data/raw/main/images/wind1.png)
