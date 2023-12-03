@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>中国气象数据可视化</title>
+    <link href="../styles/common.css" rel="stylesheet">
+    
+</head>
+<body>
+<!--顶部-->
+<header class="header left">
+  <div class="left nav">
+      <ul>
+          <li><i class="nav_1"></i><a href="">选择1</a> </li>
+          <li><i class="nav_2"></i><a href="">选择2</a> </li>
+          <li class="nav_active"><i class="nav_3"></i><a href="wind.html">风向风速</a> </li>
+          
+          </ul>
+  </div>
+    <div class="header_center left" style="position:relative">
+  
+        <h2><strong>风雨同行</strong></h2>
+
+    </div>
+    <div class="right nav text_right">
+        <ul>
+            <li><i class="nav_4"></i><a href="daylength.html">日照时长</a> </li>
+            <li><i class="nav_5"></i><a href="">选择5</a> </li>
+        </ul>
+    </div>
+
+</header>
+<!--内容部分-->
+<div class="con left" style="width:45%;">
+    <div class="div_any">
+        <div class="left div_any01" style="width:100%;">
+            <div class="div_any_child" style="width:98%; position: relative; height: 420px; z-index: 1;">
+                <div class="div_any_title" style="z-index: 2;"><img src="../images/title_20.png">2023年中国各省平均风速热力图</div>
+                <div id="histogramChart1" style="width: 45%; display: inline-block; height: 400px; margin-top: 15px;">
+                    <iframe src="wind-else/wind_map_china.html" width="100%" height="100%" frameborder="0" scrolling="no" style="position: absolute; top: 0; left: 0;"></iframe>
+                  </div>
+            </div>
+        </div>
+        <div class="left div_any01" style="width:100%;">
+            <div class="div_any_child" style="width:98%; position: relative; height: 420px; z-index: 1;">
+                <div class="div_any_title" style="z-index: 2;"><img src="../images/title_13.png">风向地图</div>
+                <div id="histogramChart1" style="width: 45%; display: inline-block; height: 400px; margin-top: 15px;">
+                    <iframe src="wind-else/wind_map.html" width="100%" height="100%" frameborder="0" style="position: absolute; top: 0; left: 0;"></iframe>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="con right" style="width:55%;">
+    <div class="div_any">
+        <div class="right div_any01" style="width:100%;">
+            <div class="div_any_child" style="width:98%; position: relative; height: 420px; z-index: 1;">
+                <div class="div_any_title" style="z-index: 2;"><img src="../images/title_15.png">2023年中国主要城市风速折线图</div>
+                <div id="histogramChart2" style="width: 45%; display: inline-block; height: 400px; margin-top: 15px;">
+                  <iframe src="wind-else/wind_speed.html" width="100%" height="100%" frameborder="0" style="position: absolute; top: 0; left: 0;"></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="left div_any01" style="width:100%;">
+            <div class="div_any_child" style="width:98%; position: relative; height: 420px; z-index: 1;">
+                <div class="div_any_title" style="z-index: 2;"><img src="../images/title_17.png">风玫瑰图</div>
+                <div id="histogramChart1" style="width: 45%; display: inline-block; height: 400px; margin-top: 15px;">
+                    
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
