@@ -41,3 +41,4 @@
 右上为各月份降水量雷达图，后期添加地图选省功能。
 右下为全国降水量聚类分析，通过使用聚类算法对全国各省的降水量聚类，类分析可以帮助划分全国不同地区的降水模式。
 这有助于制定区域性的水资源管理策略，包括灌溉安排、水库调度等。
+![wind1](https://github.com/HarleyRoot/weather-data/raw/main/images/Rainfall.jpg)
