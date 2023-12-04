@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>数据热力图</title>
+    <!-- echarts依赖js -->
+    <script type="text/javascript" src="js/Plugin/echarts.min.js"></script>
+    <!-- 地图显示依赖js -->
+    <script type="text/javascript" src="js/Plugin/echarts-map-china.js"></script>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+    <style>
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        .map {
+            width: 90%;
+            height: 90%;
+        }
+
+        #china_map {
+            width: 100%;
+            height: 100%;
+            margin-top: 70px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="map">
+        <div id="china_map"></div>
+        <select id="monthSelector" onchange="updateMap()">
+            <option value="3" selected>春季</option>
+            <option value="6" selected>夏季</option>
+            <option value="9" selected>秋季</option>
+            <option value="12" selected>冬季</option>
+            <!-- Add other months as needed -->
+        </select>
+    </div>
+</body>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('china_map'));
+
+    var dataList = [
+        {"month": "3", "name": "北京", "value": "4"},
+        {"month": "3", "name": "天津", "value": "4"}, 
+        {"month": "3", "name": "上海", "value": "9"},
+        {"month": "3", "name": "重庆", "value": "4"},
+        {"month": "3", "name": "河北", "value": "11"},
+        {"month": "3", "name": "山西", "value": "11"}, 
+        {"month": "3", "name": "黑龙江", "value": "4"},
+        {"month": "3", "name": "吉林", "value": "16"},
+        {"month": "3", "name": "辽宁", "value": "13"},
+        {"month": "3", "name": "江苏", "value": "7"}, 
+        {"month": "3", "name": "浙江", "value": "7"},
+        {"month": "3", "name": "安徽", "value": "9"},
+        {"month": "3", "name": "福建", "value": "13"},
+        {"month": "3", "name": "江西", "value": "2"}, 
+        {"month": "3", "name": "山东", "value": "11"},
+        {"month": "3", "name": "河南", "value": "13"},
+        {"month": "3", "name": "湖北", "value": "7"},
+        {"month": "3", "name": "湖南", "value": "9"}, 
+        {"month": "3", "name": "广东", "value": "9"},
+        {"month": "3", "name": "海南", "value": "26"},
+        {"month": "3", "name": "四川", "value": "13"},
+        {"month": "3", "name": "贵州", "value": "9"}, 
+        {"month": "3", "name": "云南", "value": "13"},
+        {"month": "3", "name": "陕西", "value": "9"},
+        {"month": "3", "name": "甘肃", "value": "9"},
+        {"month": "3", "name": "青海", "value": "7"}, 
+        {"month": "3", "name": "台湾", "value": "18"},
+        {"month": "3", "name": "内蒙古", "value": "13"},
+        {"month": "3", "name": "广西", "value": "13"},
+        {"month": "3", "name": "西藏", "value": "7"}, 
+        {"month": "3", "name": "宁夏", "value": "4"},
+        {"month": "3", "name": "新疆", "value": "7"},
+        {"month": "3", "name": "香港", "value": "7"},
+        {"month": "3", "name": "澳门", "value": "7"}, 
+        {"month": "6", "name": "北京", "value": "7"},
+        {"month": "6", "name": "天津", "value": "11"}, 
+        {"month": "6", "name": "上海", "value": "4"},
+        {"month": "6", "name": "重庆", "value": "0"},
+        {"month": "6", "name": "河北", "value": "9"},
+        {"month": "6", "name": "山西", "value": "7"}, 
+        {"month": "6", "name": "黑龙江", "value": "9"},
+        {"month": "6", "name": "吉林", "value": "4"},
+        {"month": "6", "name": "辽宁", "value": "16"},
+        {"month": "6", "name": "江苏", "value": "9"}, 
+        {"month": "6", "name": "浙江", "value": "9"},
+        {"month": "6", "name": "安徽", "value": "4"},
+        {"month": "6", "name": "福建", "value": "11"},
+        {"month": "6", "name": "江西", "value": "7"}, 
+        {"month": "6", "name": "山东", "value": "7"},
+        {"month": "6", "name": "河南", "value": "13"},
+        {"month": "6", "name": "湖北", "value": "11"},
+        {"month": "6", "name": "湖南", "value": "11"}, 
+        {"month": "6", "name": "广东", "value": "25"},
+        {"month": "6", "name": "海南", "value": "18"},
+        {"month": "6", "name": "四川", "value": "13"},
+        {"month": "6", "name": "贵州", "value": "13"}, 
+        {"month": "6", "name": "云南", "value": "13"},
+        {"month": "6", "name": "陕西", "value": "18"},
+        {"month": "6", "name": "甘肃", "value": "11"},
+        {"month": "6", "name": "青海", "value": "13"}, 
+        {"month": "6", "name": "台湾", "value": "13"},
+        {"month": "6", "name": "内蒙古", "value": "18"},
+        {"month": "6", "name": "广西", "value": "11"},
+        {"month": "6", "name": "西藏", "value": "9"}, 
+        {"month": "6", "name": "宁夏", "value": "7"},
+        {"month": "6", "name": "新疆", "value": "11"},
+        {"month": "6", "name": "香港", "value": "9"},
+        {"month": "6", "name": "澳门", "value": "9"}, 
+        {"month": "9", "name": "北京", "value": "4"},
+        {"month": "9", "name": "天津", "value": "4"}, 
+        {"month": "9", "name": "上海", "value": "13"},
+        {"month": "9", "name": "重庆", "value": "4"},
+        {"month": "9", "name": "河北", "value": "4"},
+        {"month": "9", "name": "山西", "value": "2"}, 
+        {"month": "9", "name": "黑龙江", "value": "9"},
+        {"month": "9", "name": "吉林", "value": "7"},
+        {"month": "9", "name": "辽宁", "value": "7"},
+        {"month": "9", "name": "江苏", "value": "7"}, 
+        {"month": "9", "name": "浙江", "value": "4"},
+        {"month": "9", "name": "安徽", "value": "7"},
+        {"month": "9", "name": "福建", "value": "22"},
+        {"month": "9", "name": "江西", "value": "9"}, 
+        {"month": "9", "name": "山东", "value": "9"},
+        {"month": "9", "name": "河南", "value": "7"},
+        {"month": "9", "name": "湖北", "value": "9"},
+        {"month": "9", "name": "湖南", "value": "13"}, 
+        {"month": "9", "name": "广东", "value": "13"},
+        {"month": "9", "name": "海南", "value": "11"},
+        {"month": "9", "name": "四川", "value": "7"},
+        {"month": "9", "name": "贵州", "value": "16"}, 
+        {"month": "9", "name": "云南", "value": "16"},
+        {"month": "9", "name": "陕西", "value": "11"},
+        {"month": "9", "name": "甘肃", "value": "11"},
+        {"month": "9", "name": "青海", "value": "16"}, 
+        {"month": "9", "name": "台湾", "value": "23"},
+        {"month": "9", "name": "内蒙古", "value": "18"},
+        {"month": "9", "name": "广西", "value": "11"},
+        {"month": "9", "name": "西藏", "value": "4"}, 
+        {"month": "9", "name": "宁夏", "value": "4"},
+        {"month": "9", "name": "新疆", "value": "13"},
+        {"month": "9", "name": "香港", "value": "7"},
+        {"month": "9", "name": "澳门", "value": "7"}, 
+        {"month": "12", "name": "北京", "value": "9"},
+        {"month": "12", "name": "天津", "value": "7"}, 
+        {"month": "12", "name": "上海", "value": "11"},
+        {"month": "12", "name": "重庆", "value": "7"},
+        {"month": "12", "name": "河北", "value": "2"},
+        {"month": "12", "name": "山西", "value": "7"}, 
+        {"month": "12", "name": "黑龙江", "value": "11"},
+        {"month": "12", "name": "吉林", "value": "11"},
+        {"month": "12", "name": "辽宁", "value": "7"},
+        {"month": "12", "name": "江苏", "value": "4"}, 
+        {"month": "12", "name": "浙江", "value": "7"},
+        {"month": "12", "name": "安徽", "value": "4"},
+        {"month": "12", "name": "福建", "value": "7"},
+        {"month": "12", "name": "江西", "value": "2"}, 
+        {"month": "12", "name": "山东", "value": "7"},
+        {"month": "12", "name": "河南", "value": "7"},
+        {"month": "12", "name": "湖北", "value": "7"},
+        {"month": "12", "name": "湖南", "value": "7"}, 
+        {"month": "12", "name": "广东", "value": "13"},
+        {"month": "12", "name": "海南", "value": "16"},
+        {"month": "12", "name": "四川", "value": "4"},
+        {"month": "12", "name": "贵州", "value": "7"}, 
+        {"month": "12", "name": "云南", "value": "20"},
+        {"month": "12", "name": "陕西", "value": "4"},
+        {"month": "12", "name": "甘肃", "value": "9"},
+        {"month": "12", "name": "青海", "value": "4"}, 
+        {"month": "12", "name": "台湾", "value": "22"},
+        {"month": "12", "name": "内蒙古", "value": "20"},
+        {"month": "12", "name": "广西", "value": "7"},
+        {"month": "12", "name": "西藏", "value": "4"}, 
+        {"month": "12", "name": "宁夏", "value": "2"},
+        {"month": "12", "name": "新疆", "value": "7"},
+        {"month": "12", "name": "香港", "value": "7"},
+        {"month": "12", "name": "澳门", "value": "7"}, 
+        // ... (other entries)
+    ];
+
+    var option = {
+        tooltip: {
+            formatter: function (params) {
+                var nameArr = params.seriesName.split(",");
+                var num1 = 0;
+                if (!isNaN(params.value)) {
+                    num1 = params.value;
+                }
+                return params.name + '<br />' + nameArr[0] + '：' + num1;
+            }
+        },
+        visualMap: {
+            min: 0,
+            max: 30,
+            left: 'left',
+            top: 'bottom',
+            text: ['高', '低'],
+            inRange: {
+                color: ['#e0ffff', '#006edd']
+            },
+            show: true
+        },
+        geo: {
+            map: 'china',
+            roam: false,
+            zoom: 1.23,
+            label: {
+                normal: {
+                    show: true,
+                    fontSize: '10',
+                    color: 'rgba(0,0,0,0.7)'
+                }
+            },
+            itemStyle: {
+                normal: {
+                    borderColor: 'rgba(0, 0, 0, 0.2)'
+                },
+                emphasis: {
+                    areaColor: '#FFFAFA',
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 0,
+                    shadowBlur: 20,
+                    borderWidth: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        },
+        series: [
+            {
+                name: '风速',
+                type: 'map',
+                geoIndex: 0,
+                data: dataList
+            }
+        ]
+    };
+
+    function updateMap() {
+        // 从下拉框中获取选定的月份
+        var selectedMonth = $("#monthSelector").val();
+
+        // 根据选定的月份更新地图数据
+        updateMapData(selectedMonth);
+
+        // 使用新数据更新图表选项
+        myChart.setOption(option);
+    }
+
+
+    // Update map data based on the selected month
+    // 根据选定的月份更新地图数据
+    function updateMapData(selectedMonth) {
+        // 根据选定的月份筛选dataList数据
+        var filteredData = dataList.filter(function (item) {
+        return item.month === selectedMonth;
+    });
+
+    // 更新'数量'系列的data属性为筛选后的数据
+    option.series[0].data = filteredData;
+}
+
+
+    $(function () {
+        document.oncontextmenu = function (e) {
+            e.preventDefault();
+        }
+        updateMap();
+        //myChart.setOption(option);
+    });
+</script>
+
+</html>
