@@ -111,10 +111,30 @@
         </div>
     
         <div class="row about-content about-content--timeline">
-            <!-- 此处插入热力图网页 -->
-            <div class="iframe-container">
-                <iframe src="example.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+            <!-- 选择热力图 -->
+            <div class="col-one">
+                <!-- Insert your button content here -->
+                <div class="map_select">
+                    <button onclick="changeContent('daylength')">day length</button><br>
+                    <button onclick="changeContent('rainfall')">rainfall</button>
+                    <button onclick="changeContent('windspeed')">wind speed</button><br>
+                    <button onclick="changeContent('AQI')">AQI</button><br>
+                    <button onclick="changeContent('temperature')">temperature</button><br>
+                </div>
             </div>
+            <!-- 此处插入热力图网页 -->
+            <div class="col-eleven" >
+                <div class="iframe-container">
+                    <iframe id="iframe" src="heatMap.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+                </div>
+
+            </div>
+            <script>
+                function changeContent(selectedMap) {
+                    var iframe = document.getElementById('iframe')
+                    iframe.contentWindow.postMessage(selectedMap, '*');
+                }
+            </script>
         </div> <!-- end about-content -->
     </section> <!-- end about -->
 
