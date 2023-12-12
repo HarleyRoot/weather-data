@@ -48,21 +48,23 @@
 <body>
 <div class="map">
     <div id="china_map"></div>
-    <select id="monthSelector" onchange="updateMap()">
-        <option value=1 selected> 一月 </option>
-        <option value=2> 二月 </option>
-        <option value=3> 三月 </option>
-        <option value=4> 四月 </option>
-        <option value=5> 五月 </option>
-        <option value=6> 六月 </option>
-        <option value=7> 七月 </option>
-        <option value=8> 八月 </option>
-        <option value=9> 九月 </option>
-        <option value=10> 十月 </option>
-        <option value=11> 十一月 </option>
+    <form autocomplete="off">
+    <select id="monthSelector" onchange="updateMap()" style="font-family: 'Arial', sans-serif; color: #000; background-color: #fff; margin-right: 10px;">
+        <option value=1 selected> 1月 </option>
+        <option value=2> 2月 </option>
+        <option value=3> 3月 </option>
+        <option value=4> 4月 </option>
+        <option value=5> 5月 </option>
+        <option value=6> 6月 </option>
+        <option value=7> 7月 </option>
+        <option value=8> 8月 </option>
+        <option value=9> 9月 </option>
+        <option value=10> 10月 </option>
+        <option value=11> 11月 </option>
     </select>
+    </form>
     <div class="map_select">
-        <button id="toggleButton">切换</button>
+        <button id="toggleButton" style="font-family: 'Arial', sans-serif; color: #000; background-color: #fff; margin-right: 10px;">切换</button>
     </div>
 </div>
 </body>
@@ -85,7 +87,7 @@
             y: 'bottom',
             text: ['16h', '9h'],
             inRange: {
-                color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026'],
+                color: ['#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026'],
             },
             formatter: function (value) {
                 return parseInt(value/60)+"h "+value%60+"mins";
@@ -94,10 +96,10 @@
         },
         'windspeed':{
             min: 0,
-            max: 30,
+            max: 10,
             left: 'left',
             top: 'bottom',
-            text: ['30m/s', '0m/s'],
+            text: ['10m/s', '0m/s'],
             inRange: {
                 color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026'],
             },
@@ -108,12 +110,12 @@
         },
         'rainfall':{
             min: 0,
-            max: 540,
+            max: 480,
             left: 'left',
             top: 'bottom',
-            text: ["540mm", "0mm"],
+            text: ["480mm", "0mm"],
             inRange: {
-                color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026'],
+                color: ['#e0f3f8', '#abd9e9', '#74add1', '#4575b4', '#313695',]
             },
             formatter: function (value) {
                 return value+" mm";
@@ -127,7 +129,7 @@
             top: 'bottom',
             text: [150, 0],
             inRange: {
-                color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026'],
+                color: ['#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026'],
             },
             show: true
         },
@@ -149,32 +151,43 @@
     const tooltip = {
         'daylength':{
             formatter: function (params) {
-                return params.name + '<br />' + "日照时长: " + parseInt(params.value/60)+"h "+params.value%60+"mins";
+                if(!isNaN(params.value))
+                    return params.name + '<br />' + parseInt(params.value / 60) + "h " + params.value % 60 + "mins";
+                else
+                    return params.name + '<br />'+ "unknown";
+
             },
         },
         'windspeed':{
             formatter: function (params) {
-                return params.name + '<br />'+ params.value.toFixed(3)+" m/s";
+                if(!isNaN(params.value))
+                    return params.name + '<br />'+ params.value.toFixed(3)+" m/s";
+                else
+                    return params.name + '<br />'+ "unknown";
             },
         },
         'rainfall':{
             formatter: function (params) {
-                return params.name + '<br />'+ parseInt(params.value)+" mm";
+                if(!isNaN(params.value))
+                    return params.name + '<br />'+ parseInt(params.value)+" mm";
+                else
+                    return params.name + '<br />'+ "unknown";
             },
         },
         'AQI':{
             formatter: function (params) {
-                var nameArr = params.seriesName.split(",");
-                var num1 = 0;
-                if (!isNaN(params.value)) {
-                    num1 = params.value;
-                }
-                return params.name + '<br />' + nameArr[0] + '：' + num1;
+                if(!isNaN(params.value))
+                    return params.name + '<br />'+ parseInt(params.value);
+                else
+                    return params.name + '<br />'+ "unknown";
             }
         },
         'temperature':{
             formatter: function (params) {
-                return params.name + '<br />'+ params.value.toFixed(1)+" \u2103";
+                if(!isNaN(params.value))
+                    return params.name + '<br />'+ params.value.toFixed(1)+" \u2103";
+                else
+                    return params.name + '<br />'+ "unknown";
             },
         },
     }
@@ -215,7 +228,7 @@
             },
         }
     }
-    var heatMap = 'temperature';
+    var heatMap = 'daylength';
     var dataList = data[heatMap];
     //默认热力图月份为1
     var heatMonth = 1;
@@ -311,7 +324,7 @@
         mapOption.series[0].data = currentData;
         mapOption.series[0].name = heatMap;
         mapOption.visualMap = visualMap[heatMap];
-        mapOption.tooltip = visualMap[heatMap];
+        mapOption.tooltip = tooltip[heatMap];
         barOption.series.data = currentData;
         barOption.series.label = label[heatMap]
         barOption.yAxis.data = currentData.map(function (item) {
