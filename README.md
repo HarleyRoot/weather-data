@@ -13,7 +13,7 @@
 MAP页面通过按钮切换可以选择不同类型的气象数据，包括日照长度、降雨量、风速、空气污染指数和温度五个方面的数据，同时选择右上角的月份可以实现不同月份相关气象数据的查看。<br />
 ![image](images/map1.png)<br />
 将鼠标放置在某省份上会出现该省份的相关信息。<br />
-![image](images/map1.png)<br />
+![image](images/map2.png)<br />
 点击swith按钮会将地图模式转换为不同省份的柱状图，由此对比各个省份更为清晰。<br />
 ![image](images/map6.png)<br />
 ### MORE页面
