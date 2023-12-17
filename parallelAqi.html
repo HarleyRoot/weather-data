@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="parallelAqi" content="width=device-width, initial-scale=1.0">
+    <title>AQI Parallel Chart</title>
+    <!-- 引入 ECharts 库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.2.0/echarts.min.js"></script>
+</head>
+
+<body>
+
+    <!-- 用于显示图表的容器 -->
+    <div id="AQIChart" style="width: 900px; height: 500px;"></div>
+
+    <script>
+        // 示例数据
+        const dataDB = [[1, 72, 50, 71, 16, 30, 0.77, '良'], [2, 71, 48, 74, 14, 32, 0.7, '良'], [3, 75, 45, 97, 11, 28, 0.62, '良'], [4, 89, 46, 114, 9, 25, 0.56, '良'], [5, 53, 22, 63, 8, 22, 0.46, '良'], [6, 38, 14, 32, 7, 25, 0.5, '优'], [7, 31, 13, 27, 6, 17, 0.53, '优'], [8, 25, 10, 23, 5, 16, 0.49, '优'], [9, 32, 13, 31, 7, 21, 0.52, '优'], [10, 47, 27, 52, 8, 29, 0.6, '优'], [11, 51, 35, 44, 10, 28, 0.6, '良']];
+        const dataHB = [[1, 61, 37, 74, 9, 28, 0.58, '良'], [2, 64, 44, 67, 7, 31, 0.58, '良'], [3, 81, 43, 116, 7, 29, 0.47, '良'], [4, 77, 35, 108, 5, 20, 0.36, '良'], [5, 49, 25, 58, 5, 19, 0.4, '优'], [6, 44, 17, 38, 5, 18, 0.4, '优'], [7, 39, 16, 32, 4, 15, 0.43, '优'], [8, 35, 17, 32, 4, 16, 0.45, '优'], [9, 40, 22, 40, 5, 22, 0.5, '优'], [10, 51, 31, 59, 6, 33, 0.52, '良'], [11, 52, 30, 62, 6, 29, 0.52, '良']];
+        const dataHD = [[1, 57, 38, 64, 6, 26, 0.59, '良'], [2, 46, 30, 48, 6, 25, 0.53, '优'], [3, 56, 30, 72, 6, 28, 0.5, '良'], [4, 55, 26, 70, 6, 21, 0.45, '良'], [5, 41, 22, 44, 5, 19, 0.42, '优'], [6, 35, 17, 31, 5, 16, 0.43, '优'], [7, 26, 12, 23, 5, 12, 0.39, '优'], [8, 30, 15, 26, 5, 14, 0.44, '优'], [9, 31, 16, 28, 5, 16, 0.47, '优'], [10, 40, 23, 43, 5, 25, 0.49, '优'], [11, 45, 25, 52, 6, 28, 0.49, '优']];
+        const dataHZ = [[1, 104, 75, 107, 8, 32, 0.84, '轻度污染'], [2, 77, 55, 72, 7, 33, 0.71, '良'], [3, 77, 43, 98, 7, 34, 0.66, '良'], [4, 67, 32, 85, 6, 24, 0.59, '良'], [5, 46, 25, 49, 6, 20, 0.58, '优'], [6, 42, 19, 37, 5, 19, 0.56, '优'], [7, 31, 14, 29, 5, 14, 0.53, '优'], [8, 37, 19, 33, 5, 16, 0.58, '优'], [9, 36, 18, 32, 5, 18, 0.61, '优'], [10, 53, 33, 59, 7, 33, 0.66, '良'], [11, 61, 37, 69, 7, 37, 0.71, '良']];
+        const dataHN = [[1, 43, 29, 44, 6, 17, 0.65, '优'], [2, 37, 23, 40, 6, 20, 0.66, '优'], [3, 40, 23, 44, 6, 19, 0.57, '优'], [4, 34, 19, 36, 6, 16, 0.55, '优'], [5, 31, 17, 31, 5, 14, 0.48, '优'], [6, 22, 11, 20, 5, 12, 0.44, '优'], [7, 22, 10, 20, 5, 11, 0.44, '优'], [8, 23, 11, 21, 5, 13, 0.46, '优'], [9, 23, 11, 20, 6, 14, 0.45, '优'], [10, 29, 17, 28, 6, 15, 0.5, '优'], [11, 37, 20, 39, 7, 21, 0.5, '优']];
+        const dataXB = [[1, 82, 58, 93, 8, 32, 0.79, '良'], [2, 72, 54, 75, 6, 31, 0.7, '良'], [3, 56, 30, 73, 6, 24, 0.44, '良'], [4, 53, 25, 79, 5, 17, 0.33, '良'], [5, 31, 15, 35, 5, 14, 0.29, '优'], [6, 29, 12, 28, 5, 15, 0.28, '优'], [7, 29, 11, 27, 4, 15, 0.3, '优'], [8, 28, 12, 28, 4, 15, 0.34, '优'], [9, 27, 13, 29, 4, 17, 0.34, '优'], [10, 33, 18, 38, 5, 25, 0.42, '优'], [11, 41, 24, 50, 6, 27, 0.51, '优']];
+        const dataXN = [[1, 64, 43, 65, 7, 24, 0.63, '良'], [2, 55, 37, 53, 7, 25, 0.65, '良'], [3, 45, 26, 45, 6, 24, 0.54, '优'], [4, 47, 24, 50, 6, 19, 0.49, '优'], [5, 38, 19, 34, 5, 17, 0.46, '优'], [6, 33, 15, 27, 5, 17, 0.44, '优'], [7, 29, 12, 23, 6, 15, 0.43, '优'], [8, 27, 12, 22, 6, 15, 0.44, '优'], [9, 29, 14, 24, 6, 16, 0.45, '优'], [10, 30, 17, 28, 6, 20, 0.51, '优'], [11, 42, 25, 43, 7, 26, 0.59, '优']];
+        // 初始化图表
+        var myChart = echarts.init(document.getElementById('AQIChart'));
+
+        // 更新图表数据
+        function updateChart() {
+            // 更新图表
+            var schema = [
+                { name: 'date', index: 0, text: '月份' },
+                { name: 'AQIindex', index: 1, text: 'AQI' },
+                { name: 'PM25', index: 2, text: 'PM2.5' },
+                { name: 'PM10', index: 3, text: 'PM10' },
+                { name: 'SO2', index: 4, text: 'SO2' },
+                { name: 'NO2', index: 5, text: 'NO2' },
+                { name: 'CO', index: 6, text: ' CO' },
+                { name: '等级', index: 7, text: '等级' }
+            ];
+            var lineStyle = {
+                width: 1,
+                opacity: 0.5
+            };
+            myChart.setOption({
+                backgroundColor: '#333',
+                legend: {
+                    bottom: 30,
+                    data: ['东北', '华北', '华东', '华中', '华南', '西北', '西南'],
+                    itemGap: 20,
+                    textStyle: {
+                        color: '#fff',
+                        fontSize: 14
+                    }
+                },
+                tooltip: {
+                    padding: 10,
+                    backgroundColor: '#222',
+                    borderColor: '#777',
+                    borderWidth: 1
+                },
+                parallelAxis: [
+                    {
+                        dim: 0,
+                        name: schema[0].text,
+                        inverse: true,
+                        max: 12,
+                        nameLocation: 'start'
+                    },
+                    { dim: 1, name: schema[1].text, max: 110 },
+                    { dim: 2, name: schema[2].text, max: 80 },
+                    { dim: 3, name: schema[3].text, max: 120 },
+                    { dim: 4, name: schema[4].text, max: 17 },
+                    { dim: 5, name: schema[5].text, max: 40 },
+                    { dim: 6, name: schema[6].text, max: 0.9 },
+                    {
+                        dim: 7,
+                        name: schema[7].text,
+                        type: 'category',
+                        data: ['优', '良', '轻度污染', '中度污染', '重度污染', '严重污染']
+                    }
+                ],
+                visualMap: {
+                    show: true,
+                    min: 0,
+                    max: 70,
+                    dimension: 2,
+                    inRange: {
+                        color: ['#d94e5d', '#eac736', '#50a3ba'].reverse()
+                        // colorAlpha: [0, 1]
+                    }
+                },
+                parallel: {
+                    left: '5%',
+                    right: '18%',
+                    bottom: 100,
+                    parallelAxisDefault: {
+                        type: 'value',
+                        name: 'AQI指数',
+                        nameLocation: 'end',
+                        nameGap: 20,
+                        nameTextStyle: {
+                            color: '#fff',
+                            fontSize: 12
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: '#aaa'
+                            }
+                        },
+                        axisTick: {
+                            lineStyle: {
+                                color: '#777'
+                            }
+                        },
+                        splitLine: {
+                            show: false
+                        },
+                        axisLabel: {
+                            color: '#fff'
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: '东北',
+                        type: 'parallel',
+                        lineStyle: lineStyle,
+                        data: dataDB
+                    },
+                    {
+                        name: '华北',
+                        type: 'parallel',
+                        lineStyle: lineStyle,
+                        data: dataHB
+                    },
+                    {
+                        name: '华东',
+                        type: 'parallel',
+                        lineStyle: lineStyle,
+                        data: dataHD
+                    },
+                    {
+                        name: '华中',
+                        type: 'parallel',
+                        lineStyle: lineStyle,
+                        data: dataHZ
+                    },
+                    {
+                        name: '华南',
+                        type: 'parallel',
+                        lineStyle: lineStyle,
+                        data: dataHN
+                    },
+                    {
+                        name: '西北',
+                        type: 'parallel',
+                        lineStyle: lineStyle,
+                        data: dataXB
+                    },
+                    {
+                        name: '西南',
+                        type: 'parallel',
+                        lineStyle: lineStyle,
+                        data: dataXN
+                    }
+                ]
+            });
+        }
+
+        // 初次加载图表
+        updateChart();
+    </script>
+</body>
+
+</html>
