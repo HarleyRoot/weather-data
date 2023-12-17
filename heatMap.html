@@ -28,46 +28,180 @@
             width: 100%;
             height: 100%;
         }
-
-        #monthSelector {
-            /* 设置选择框在左上角，调整值根据实际情况调整 */
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-
         .map_select {
             /* 设置切换按钮在左上角，调整值根据实际情况调整 */
             position: absolute;
-            top: 60px;
-            right: 10px;
+            top: 40px;
+            right: 40px;
+            border-radius: 90%; /* 将图片变成圆形 */
         }
+        .new_div1 {
+    position: absolute;
+    top: 80px; /* 调整下方的距离 */
+    right: 60px;
+    /* 其他样式属性 */
+}
+            .new_div2 {
+    position: absolute;
+    top: 115px; /* 调整下方的距离 */
+    right: 35px;
+    /* 其他样式属性 */
+}
+            .new_div3 {
+    position: absolute;
+    top: 155px; /* 调整下方的距离 */
+    right: 18px;
+    /* 其他样式属性 */
+}
+            .new_div4 {
+    position: absolute;
+    top: 200px; /* 调整下方的距离 */
+    right: 6px;
+    /* 其他样式属性 */
+}
+            .new_div5 {
+    position: absolute;
+    top: 250px; /* 调整下方的距离 */
+    right: 0px;
+    /* 其他样式属性 */
+}
+            .new_div6 {
+    position: absolute;
+    top: 300px; /* 调整下方的距离 */
+    right: -6px;
+    /* 其他样式属性 */
+}
+            .new_div7 {
+    position: absolute;
+    top: 350px; /* 调整下方的距离 */
+    right: 0px;
+    /* 其他样式属性 */
+}
+            .new_div8 {
+    position: absolute;
+    top: 400px; /* 调整下方的距离 */
+    right: 6px;
+    /* 其他样式属性 */
+}
+            .new_div9 {
+    position: absolute;
+    top: 445px; /* 调整下方的距离 */
+    right: 18px;
+    /* 其他样式属性 */
+}
+            .new_div10 {
+    position: absolute;
+    top: 485px; /* 调整下方的距离 */
+    right: 35px;
+    /* 其他样式属性 */
+}
+            .new_div11 {
+    position: absolute;
+    top: 520px; /* 调整下方的距离 */
+    right: 60px;
+    /* 其他样式属性 */
+
+}
+
+         .custom-button {
+             margin-right: 0px;
+             margin-top: 0px;
+             border-radius: 50%; /* 将按钮变成圆形 */
+             background-color: #fff; /* 设置按钮背景色为白色 */
+              border: none; /* 设置边框为无边框 */
+    }
+          .custom-button.clicked {
+        /* 添加被点击后的样式 */
+        border: 2px solid #B8959D; /* 设置边框为橙色 */
+        background-color: #B8959D; /* 设置背景颜色为橙色 */
+        color: #fff; /* 设置文字颜色为白色 */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* 添加阴影效果 */
+    }
+         .custom-button:active {
+    /* 在按钮被点击时添加高亮效果 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* 添加阴影效果 */
+}
+
+
+.custom-image {
+    width: 30px; /* 调整图片宽度 */
+    height: 30px; /* 调整图片高度 */
+    object-fit: cover; /* 保持图片比例，填充整个容器 */
+    border-radius: 90%; /* 将图片变成圆形 */
+}
+
     </style>
+
 </head>
 
 <body>
+
 <div class="map">
     <div id="china_map"></div>
-    <form autocomplete="off">
-    <select id="monthSelector" onchange="updateMap()" style="font-family: 'Arial', sans-serif; color: #000; background-color: #fff; margin-right: 10px;">
-        <option value=1 selected> Jan </option>
-        <option value=2> Feb </option>
-        <option value=3> Mar </option>
-        <option value=4> Apr </option>
-        <option value=5> May </option>
-        <option value=6> Jun </option>
-        <option value=7> Jul </option>
-        <option value=8> Aug </option>
-        <option value=9> Sep </option>
-        <option value=10> Oct </option>
-        <option value=11> Nov </option>
-    </select>
-    </form>
+
+
+     <div class="new_div1">
+         <button class="custom-button" value=1 onclick="updateMap(1)"><img class="custom-image" src="./static/image/1.jpg"></button>
+    </div>
+     <div class="new_div2">
+         <button class="custom-button" value=2 onclick="updateMap(2)"><img class="custom-image" src="./static/image/2.jpg"></button>
+    </div>
+     <div class="new_div3">
+         <button class="custom-button" value=3 onclick="updateMap(3)"><img class="custom-image" src="./static/image/3.jpg"></button>
+    </div>
+     <div class="new_div4">
+         <button class="custom-button" value=4 onclick="updateMap(4)"><img class="custom-image" src="./static/image/4.jpg"></button>
+    </div>
+     <div class="new_div5">
+         <button class="custom-button" value=5 onclick="updateMap(5)"><img class="custom-image" src="./static/image/5.jpg"></button>
+    </div>
+     <div class="new_div6">
+         <button class="custom-button" value=6 onclick="updateMap(6)"><img class="custom-image" src="./static/image/6.jpg"></button>
+    </div>
+     <div class="new_div7">
+         <button class="custom-button" value=7 onclick="updateMap(7)"><img class="custom-image" src="./static/image/7.jpg"></button>
+    </div>
+     <div class="new_div8">
+         <button class="custom-button" value=8 onclick="updateMap(8)"><img class="custom-image" src="./static/image/8.jpg"></button>
+    </div>
+     <div class="new_div9">
+         <button class="custom-button" value=9 onclick="updateMap(9)"><img class="custom-image" src="./static/image/9.jpg"></button>
+    </div>
+     <div class="new_div10">
+         <button class="custom-button" value=10 onclick="updateMap(10)"><img class="custom-image" src="./static/image/10.jpg"></button>
+    </div>
+     <div class="new_div11">
+         <button class="custom-button" value=11 onclick="updateMap(11)"><img class="custom-image" src="./static/image/11.jpg"></button>
+    </div>
+    <script>
+    // 获取所有按钮元素
+    var buttons = document.querySelectorAll('.custom-button');
+
+    // 为每个按钮添加点击事件监听器
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            // 移除所有按钮的点击样式
+            buttons.forEach(function(btn) {
+                btn.classList.remove('clicked');
+            });
+
+            // 为当前点击的按钮添加点击样式
+            button.classList.add('clicked');
+
+            // 调用你的updateMap函数，传递按钮的值作为参数
+            updateMap(parseInt(button.value));
+        });
+    });
+</script>
+
+
+
     <div class="map_select">
         <button id="toggleButton" style="font-family: 'Arial', sans-serif; color: #000; background-color: #fff; margin-right: 10px;">switch</button>
     </div>
 </div>
 </body>
+
 <script type="text/javascript">
 
     // 热力图
@@ -251,7 +385,7 @@
             left: 'center' // 居中显示
         }
     }
-    var month = ['1', '2', '3','4'];
+
     var heatMap = 'daylength';
     var dataList = data[heatMap];
     //默认热力图月份为1
@@ -260,7 +394,6 @@
         tooltip: tooltip[heatMap],
         visualMap: visualMap[heatMap],
         title: mytitle[heatMap],
-
         series: [
             {
                 id: 'pop',
@@ -352,7 +485,6 @@
         mapOption.series[0].name = heatMap;
         mapOption.visualMap = visualMap[heatMap];
         mapOption.tooltip = tooltip[heatMap];
-        // mapOption.timeline = timeline;
         mapOption.title=mytitle[heatMap];
         barOption.series.data = currentData;
         barOption.series.label = label[heatMap];
@@ -364,8 +496,8 @@
 
     let isMap = true;
     //根据选择的月份重新绘制
-    function updateMap(){
-        heatMonth = parseInt($("#monthSelector").val());
+    function updateMap(month){
+        heatMonth = month;
         updateHeatChart();
         mapChart.setOption(isMap?mapOption:barOption, true);
     };
