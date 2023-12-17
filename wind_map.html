@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+
+<head>
+    <meta charset="utf-8">
+    <title>不同月份的风向图</title>
+</head>
+
+<body style="height: 100%; margin: 0">
+    <!-- 设置 HTML 和 Body 的高度为 100% -->
+    <div style="height: 100%">
+        <select id="monthSelector" style="position: absolute; top: 10px; left: 10px; z-index: 999;">
+            <option value="01">Jan</option>
+            <option value="02">Feb</option>
+            <option value="03">Mar</option>
+            <option value="04">Apr</option>
+            <option value="05">May</option>
+            <option value="06">Jun</option>
+            <option value="07">Jul</option>
+            <option value="08">Aug</option>
+            <option value="09">Sep</option>
+            <option value="10">Oct</option>
+            <option value="11">Nov</option>
+            <option value="12">Dec</option>
+            <!-- 添加其他月份选项 -->
+        </select>
+        <div id="container" style="height: 100%"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ZvvwkK5d5DppdRw1wQ9GHYpiE0rEPsVR"></script>
+    <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript" src="js/Plugin/echarts.min.js"></script>
+    <script type="text/javascript" src="js/Plugin/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="js/Plugin/ecStat.min.js"></script>
+    <script type="text/javascript" src="js/Plugin/dataTool.min.js"></script>
+    <script type="text/javascript" src="js/Plugin/echarts-map-china.js"></script>
+    <script type="text/javascript" src="js/Plugin/world.js"></script>
+    <script type="text/javascript" src="js/Plugin/bmap.min.js"></script>
+    <script type="text/javascript">
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        var app = {};
+        var option = null;
+
+        // 定义 loadDate 函数
+        function loadData(month) {
+            // 异步加载 CSV 文件
+            var filePath = `https://raw.githubusercontent.com/JoyeWa/xiangmu3/main/wind/wind-${month}.csv`;
+            d3.csv(filePath).then(function (windData) {
+                var data = [];
+                var maxMag = 0;
+                var minMag = Infinity;
+
+                // 处理 CSV 数据
+                windData.forEach(function (item) {
+                    var vx = parseFloat(item["U"]);
+                    var vy = parseFloat(item["V"]);
+                    var mag = Math.sqrt(vx * vx + vy * vy);
+
+                    data.push([
+                        parseFloat(item["lon"]),
+                        parseFloat(item["lat"]),
+                        vx,
+                        vy,
+                        mag
+                    ]);
+
+                    maxMag = Math.max(mag, maxMag);
+                    minMag = Math.min(mag, minMag);
+                });
+
+                myChart.setOption(option = {
+                    visualMap: {
+                        left: 'right',
+                        min: minMag,
+                        max: maxMag,
+                        dimension: 4,
+                        inRange: {
+                            color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+                        },
+                        realtime: false,
+                        calculable: true,
+                        textStyle: {
+                            color: '#fff'
+                        }
+                    },
+                    bmap: {
+                        center: [104.195397, 35.86166],
+                        zoom: 3,
+                        roam: true,
+                        mapStyle: {
+                            // ...（你的地图样式配置）
+                            styleJson:[
+                            {
+                                featureType: "label",
+                                elementType: "all",
+                                stylers: {
+                                    visibility: "off",
+                                },
+                            },
+                            ]
+                        }
+                    },
+                    series: [{
+                        type: 'flowGL',
+                        coordinateSystem: 'bmap',
+                        data: data,
+                        supersampling: 4,
+                        particleType: 'line',
+                        particleDensity: 128,
+                        particleSpeed: 1,
+                        itemStyle: {
+                            opacity: 0.7
+                        }
+                    }]
+                });
+            }).catch(function (error) {
+                console.error("Error loading data:", error);
+            });
+        }
+
+        // 初始化加载数据
+        var initialMonth = '01';  // 设置初始月份
+        loadData(initialMonth);
+
+        // 监听下拉框变化事件
+        $("#monthSelector").change(function () {
+            var selectedMonth = $(this).val();
+            loadData(selectedMonth);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<!--[if lt IE 9 ]><html class="no-js oldie" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>index</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- script
+    ================================================== -->
+    <script src="js/Plugin/modernizr.js"></script>
+    <script src="js/Plugin/pace.min.js"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <style>
+         h2 {
+            display: inline-block;
+            margin-right: 50px; /* 可选：增加右侧间距 */
+               font-size: 16px;   /* 设置字体大小 */
+        }
+          h2.left {
+           position: absolute;
+            left: 15%;
+            width: 30%; /* 45% - 15% = 30% */
+        }
+
+        /* 使用CSS将标题2占据右侧25%位置 */
+        h2.right {
+             width: 30%;
+            float: right; /* 让标题2浮动到右侧 */
+        }
+         h2.center {
+            width: 50%;
+            float: right; /* 让标题2浮动到右侧 */
+        }
+          a {
+            color: rgba(155, 155, 155, 0.99);
+        }
+          a:hover {
+            color: #ffffff;
+        }
+    </style>
+
+</head>
+
+<body id="top">
+
+    <!-- header
+    ================================================== -->
+    <header class="s-header">
+
+
+        <nav class="header-nav-wrap">
+            <ul class="header-nav">
+                <li class="current"><a class="smoothscroll"  href="#home" title="home">Home</a></li>
+                <li><a class="smoothscroll"  href="#map" title="map">MAP</a></li>
+                <li><a class="smoothscroll"  href="#works" title="works">Works</a></li>
+                <li><a class="smoothscroll"  href="#blog" title="blog">Blog</a></li>
+                <li><a class="smoothscroll"  href="#contact" title="contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <a class="header-menu-toggle" href="#0"><span>Menu</span></a>
+
+    </header> <!-- end s-header -->
+
+
+   <!-- home
+   ================================================== -->
+   <section id="home" class="s-home page-hero target-section" data-parallax="scroll" data-image-src="images/hero-bg.jpg" data-natural-width=3000 data-natural-height=2000 data-position-y=center>
+
+        <div class="overlay"></div>
+        <div class="shadow-overlay"></div>
+
+        <div class="home-content">
+
+            <div class="row home-content__main">
+
+                <h3>Through Thick and Thin</h3>
+
+                <h1>
+                    The Wonderful Journey of Chinese Meteorological Data 
+                </h1>
+
+                <div class="home-content__buttons">
+                    <a href="#works" class="smoothscroll btn btn--stroke">
+                      Data Visualization
+                    </a>
+                    <a href="#map" class="smoothscroll btn btn--stroke">
+                      Map Visualization
+                    </a>
+                </div>
+
+                <div class="home-content__scroll">
+                    <a href="#map" class="scroll-link smoothscroll">
+                        <span>Scroll Down</span>
+                    </a>
+                </div>
+
+            </div>
+
+        </div> <!-- end home-content -->
+
+        
+
+    </section> <!-- end s-home -->
+
+
+    <!-- 绘制中国地图的部分
+    ================================================== -->
+    <section id="map" class="s-about target-section">
+        <div class="row narrow section-intro has-bottom-sep">
+            <div class="col-full text-center">
+                <h3>MAP</h3>
+                <h1>Some Heatmaps About Chinese Meteorology</h1>
+                <p class="lead">We have created heatmaps for the provinces across China, depicting temperature, precipitation, wind speed, sunshine duration, and AQI index over the months. You can explore these visualizations by selecting different criteria.</p>
+            </div>
+        </div>
+    
+        <div class="row about-content about-content--timeline">
+            <!-- 选择热力图 -->
+            <div class="col-one">
+                <!-- Insert your button content here -->
+                <div class="map_select">
+                    <button class="small-button" onclick="changeHeatMap('daylength')">day length</button><br>
+                    <button class="small-button" onclick="changeHeatMap('rainfall')">rainfall</button>
+                    <button class="small-button" onclick="changeHeatMap('windspeed')">wind speed</button><br>
+                    <button class="small-button" onclick="changeHeatMap('AQI')">AQI</button><br>
+                    <button class="small-button" onclick="changeHeatMap('temperature')">temperature</button><br>
+                </div>
+            </div>
+            <!-- 此处插入热力图网页 -->
+            <div class="col-eleven" >
+                <div class="iframe-container">
+                    <iframe id="iframe" src="heatMap.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+                </div>
+
+            </div>
+            <script>
+                function changeHeatMap(selectedMap) {
+                    var iframe = document.getElementById('iframe')
+                    iframe.contentWindow.postMessage(selectedMap, '*');
+                }
+            </script>
+        </div> <!-- end about-content -->
+    </section> <!-- end about -->
+
+
+    <!-- works 折线图+雷达图+立体降雨+风向图+平行坐标图
+    ================================================== -->
+    <section id="works" class="s-works target-section">
+
+        <div class="row narrow section-intro has-bottom-sep">
+            <div class="col-full">
+                <h3>More</h3>
+                <h1>Further Analysis of the Data</h1>
+    
+                <p class="lead">By drawing heat maps for each province, we can only make rough observations. We further created line charts, radar charts, and parallel coordinate plots, among other visualizations, for a more in-depth analysis of the data.</p>
+            </div>
+        </div>
+
+
+
+        <div class="row about-content about-content--timeline">
+                <div class="col-full">
+                    <!-- 折线图 -->
+                    <div class="col-nine">
+                        <div class="iframe-container">
+                        <iframe src="tempAndprce.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="col-three">
+                    <!-- 折线图 -->
+                    <div class="mycontainer">
+                        <iframe src="TemperAndDL.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+                    </div>
+                </div>
+                </div>
+
+        </div> <!-- end about-content -->
+
+
+    <h2 class="left">visualization of precipitation in provinces and counties</h2>
+    <h2 class="right">wind field chart</h2>
+
+        <div class="row about-content about-content--timeline">
+
+            <div class="col-full">
+
+
+                <div class="col-six">
+
+                    <!-- 立体降水 -->
+                    <div class="iframe-container">
+                        <iframe src="water_3level.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+                    </div>
+                </div>
+
+                <div class="col-six">
+                    <!-- 风向 -->
+                    <div class="iframe-container">
+                        <iframe src="wind_map.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div> <!-- end about-content -->
+
+
+
+        <div class="row about-content about-content--timeline">
+<h2 class="center">pollutant analysis</h2>
+            <div class="col-full">
+                <div class="col-three">
+                    <div class="mycontainer">
+                        <iframe src="rankChart.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+                    </div>
+                </div>
+                <div class="col-nine">
+                    <div class="iframe-container">
+                         <!-- 此处插入平行坐标图 -->
+                        <iframe src="parallelAqi.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+                    </div>
+                </div>
+            </div>
+
+
+        </div> <!-- end about-content -->
+    </section> <!-- end works -->
+
+
+    <!-- blog 记录我们项目进程
+    ================================================== -->
+    <section id="blog" class="s-blog target-section">
+
+        <div class="row narrow section-intro has-bottom-sep">
+            <div class="col-full">
+                <h3>Journal</h3>
+                <h1>The Project Process</h1>
+            </div>
+        </div>
+
+        <div class="row blog-content">
+            <div class="col-full">
+
+                <div class="blog-list block-1-2 block-tab-full">
+                    <article class="col-block">
+                                
+                        <div class="blog-date">
+                            <a>Nov 24, 2023</a>
+                        </div>  
+                        
+                        <h2 class="h01">Determinie the Theme and Team Members</h2>
+                        <p>
+                            We have chosen to focus on the visualization design of Chinese meteorological data. The main sources of data are from the following websites:https://data.cma.cn/,https://rp5.ru..
+                        </p>
+
+                        
+                    </article>
+                    <article class="col-block">
+                                
+                        <div class="blog-date">
+                            <a>Dec 3, 2023</a>
+                        </div>  
+                        
+                        <h2 class="h01">Develop an Initial Prototype of Project</h2>
+                        <p>
+                            At the beginning, we decided that each person would create a separate webpage, with individual themes focusing on: temperature, precipitation, wind direction and speed, sunshine duration, and air pollution. However, as we attempted to merge them, we found that the resulting webpage was scattered and disorganized.
+                        </p>
+                        
+                    </article>
+                    <article class="col-block">
+                        
+                        <div class="blog-date">
+                            <a>Dec 4, 2023</a>
+                        </div>
+
+                        <h2 class="h01">Change Webpage Format and Chart Content</h2>
+                        <p>
+                            We reallocated tasks and planned the charts each person would create.
+                        </p>
+
+                    </article>
+                    <article class="col-block">
+                        
+                        <div class="blog-date">
+                            <a >Dec 16, 2023</a>
+                        </div>    
+                        <h2 class="h01">Project Completion</h2>
+                        <p>
+                        We finished the web pages.
+                        </p>
+
+                    </article>
+                </div> <!-- end blog-list -->
+
+            </div> <!-- end col-full -->
+        </div> <!-- end blog-content -->
+
+    </section> <!-- end s-blog -->
+
+
+    <!-- s-cta
+    ================================================== -->
+    <section class="s-cta">
+        
+        <div class="row narrow cta">
+
+            <div class="col-full cta__content">
+
+                <div class="cta__action">
+                    <a class="btn btn--primary btn--large" href="#">Scroll to the top</a>
+                </div>	
+
+            </div>
+
+        </div> <!-- end cta -->
+        
+    </section>
+
+
+    
+    <!-- s-stats 相关内容
+    ================================================== -->
+    <section id="contact" class="s-contact target-section">
+
+        <div class="overlay"></div>
+
+        <div class="row narrow section-intro">
+            <div class="col-full">
+                <h3>Contact</h3>
+                <h1>Visualization Techniques.</h1>
+            </div>
+        </div>
+
+        <div class="row contact__main">
+            
+            <h4 class="h06">Github Address</h4>
+             <a href="https://github.com/HarleyRoot/weather-data">https://github.com/HarleyRoot/weather-data</a>
+
+
+            <h4 class="h06">Members and Responsibilities</h4>
+            <p>Zhang Wenjing:<br>
+            Wang Qian:<br>
+            Shi Jiajia:<br>
+            Chen Meng:<br>
+            Wang jiaying:
+            </p>
+
+        </div>
+
+    </section> <!-- end s-contact -->
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
+
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="js/Plugin/jquery-3.3.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/Plugin/main.js"></script>
+</body>
+
+</html>
